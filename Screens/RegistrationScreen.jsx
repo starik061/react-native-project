@@ -50,25 +50,28 @@ const RegistrationScreen = () => {
             placeholderTextColor="#BDBDBD"
             style={styles.input}
           />
-          <View style={styles.passwordContainer}>
+          <View style={styles.passwordWrapper}>
             <TextInput
               inputMode="text"
               secureTextEntry={true}
               placeholder="Password"
               placeholderTextColor="#BDBDBD"
-              style={styles.input}
+              style={[styles.input, styles.inputPassword]}
             />
-            <TouchableOpacity style={styles.showPasswordContainer}>
-              <Text style={styles.showPasswordText}>Show</Text>
+            <TouchableOpacity style={styles.showButtonWrapper}>
+              <Text style={styles.showButton}>Show</Text>
             </TouchableOpacity>
           </View>
 
-          <Button title="Register" />
-          <TouchableHighlight>
-            <Text style={{ color: "white" }}>
+          <TouchableOpacity style={styles.registerButton}>
+            <Text style={styles.registerButtonText}>Register</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={styles.alreadyHaveAccountText}>
               Already have an account? Log in
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
     height: 51,
-    padding: 16,
+    padding: "4%",
     marginBottom: 16,
     fontSize: 16,
     lineHeight: 1.17,
@@ -128,24 +131,41 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
     borderRadius: 5,
   },
-  passwordContainer: {
-    width: "100%",
+  inputPassword: {
+    paddingRight: 60,
+  },
+  passwordWrapper: {
     position: "relative",
+    width: "100%",
+    marginBottom: "5%",
   },
-
-  showPasswordContainer: {
+  showButtonWrapper: {
     position: "absolute",
-    height: "100%",
-    right: 16,
-    backgroundColor: "red",
+    right: "4%",
+    top: 13,
   },
-  // transform: [{ translateY: 12.5 }],
-
-  showPasswordText: {
-    height: "100%",
-    fontSize: 16,
-    lineHeight: 1.17,
+  showButton: {
     fontFamily: "Roboto",
+    fontSize: 16,
+    color: "#1B4371",
+  },
+  registerButton: {
+    width: "100%",
+    height: 51,
+    marginBottom: "2.5%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FF6C00",
+    borderRadius: 25,
+  },
+  registerButtonText: {
+    fontFamily: "Roboto",
+    fontSize: 16,
+    color: "#FFFFFF",
+  },
+  alreadyHaveAccountText: {
+    fontFamily: "Roboto",
+    fontSize: 16,
     color: "#1B4371",
   },
 });
