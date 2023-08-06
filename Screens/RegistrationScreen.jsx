@@ -1,17 +1,15 @@
 import React from "react";
 import {
-  Button,
   ImageBackground,
   StyleSheet,
   Text,
   TextInput,
-  TouchableHighlight,
   TouchableOpacity,
   View,
 } from "react-native";
 
-import bg from "../src/images/background.jpg";
-// import AddAvatarIcon from "../src/images/add-avatar-icon.svg";
+import bg from "../assets/images/background.jpg";
+
 import { AntDesign } from "@expo/vector-icons";
 
 const RegistrationScreen = () => {
@@ -30,12 +28,6 @@ const RegistrationScreen = () => {
               color="#FF6C00"
               style={styles.addAvatarIcon}
             />
-
-            {/* <AddAvatarIcon
-              style={styles.addAvatarIcon}
-              width={25}
-              height={25}
-            ></AddAvatarIcon> */}
           </View>
           <Text style={styles.registrationHeader}>Registration</Text>
           <TextInput
@@ -77,7 +69,6 @@ const RegistrationScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -88,11 +79,11 @@ const styles = StyleSheet.create({
   },
   form: {
     position: "relative",
-    flex: 0.68,
+
     alignItems: "center",
-    paddingTop: "24%",
-    paddingLeft: "4%",
-    paddingRight: "4%",
+    paddingTop: 92,
+    paddingBottom: 45,
+    paddingHorizontal: 16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "#FFFFFF",
@@ -120,7 +111,7 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
     height: 51,
-    padding: "4%",
+    padding: 16,
     marginBottom: 16,
     fontSize: 16,
     lineHeight: 1.17,
@@ -137,11 +128,11 @@ const styles = StyleSheet.create({
   passwordWrapper: {
     position: "relative",
     width: "100%",
-    marginBottom: "5%",
+    marginBottom: 43,
   },
   showButtonWrapper: {
     position: "absolute",
-    right: "4%",
+    right: 16,
     top: 13,
   },
   showButton: {
@@ -152,7 +143,7 @@ const styles = StyleSheet.create({
   registerButton: {
     width: "100%",
     height: 51,
-    marginBottom: "2.5%",
+    marginBottom: 16,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FF6C00",
@@ -169,5 +160,96 @@ const styles = StyleSheet.create({
     color: "#1B4371",
   },
 });
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   backgoundImage: {
+//     flex: 1,
+//     justifyContent: "flex-end",
+//   },
+//   form: {
+//     position: "relative",
+//     flex: 0.68,
+//     alignItems: "center",
+//     paddingTop: "24%",
+//     paddingLeft: "4%",
+//     paddingRight: "4%",
+//     borderTopLeftRadius: 25,
+//     borderTopRightRadius: 25,
+//     backgroundColor: "#FFFFFF",
+//   },
+//   avatar: {
+//     position: "absolute",
+//     top: -60,
+//     width: 120,
+//     height: 120,
+//     borderRadius: 16,
+//     backgroundColor: "#F6F6F6",
+//   },
+//   addAvatarIcon: {
+//     position: "absolute",
+//     right: -12.5,
+//     bottom: 14,
+//   },
+//   registrationHeader: {
+//     marginBottom: 32,
+//     fontFamily: "Roboto",
+//     fontWeight: "500",
+//     fontSize: 30,
+//     color: "#212121",
+//   },
+//   input: {
+//     width: "100%",
+//     height: 51,
+//     padding: "4%",
+//     marginBottom: 16,
+//     fontSize: 16,
+//     lineHeight: 1.17,
+//     fontFamily: "Roboto",
+//     backgroundColor: "#F6F6F6",
+//     borderWidth: 1,
+//     borderStyle: "solid",
+//     borderColor: "#E8E8E8",
+//     borderRadius: 5,
+//   },
+//   inputPassword: {
+//     paddingRight: 60,
+//   },
+//   passwordWrapper: {
+//     position: "relative",
+//     width: "100%",
+//     marginBottom: "5%",
+//   },
+//   showButtonWrapper: {
+//     position: "absolute",
+//     right: "4%",
+//     top: 13,
+//   },
+//   showButton: {
+//     fontFamily: "Roboto",
+//     fontSize: 16,
+//     color: "#1B4371",
+//   },
+//   registerButton: {
+//     width: "100%",
+//     height: 51,
+//     marginBottom: "2.5%",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "#FF6C00",
+//     borderRadius: 25,
+//   },
+//   registerButtonText: {
+//     fontFamily: "Roboto",
+//     fontSize: 16,
+//     color: "#FFFFFF",
+//   },
+//   alreadyHaveAccountText: {
+//     fontFamily: "Roboto",
+//     fontSize: 16,
+//     color: "#1B4371",
+//   },
+// });
 
 export default RegistrationScreen;
