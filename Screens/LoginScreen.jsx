@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -10,9 +10,13 @@ import {
 
 import bg from "../assets/images/background.jpg";
 
-import { AntDesign } from "@expo/vector-icons";
-
 const LoginScreen = () => {
+  const [activeInput, setActiveInput] = useState(false);
+
+  const handleInputFocus = (inputName) => {
+    setActiveInput(inputName);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -23,18 +27,35 @@ const LoginScreen = () => {
         <View style={styles.form}>
           <Text style={styles.registrationHeader}>Log in</Text>
           <TextInput
+            name="email"
             inputMode="email"
             placeholder="Email address"
             placeholderTextColor="#BDBDBD"
-            style={styles.input}
+            style={[
+              styles.input,
+              activeInput === "email" && styles.inputActive,
+            ]}
+            onFocus={() => {
+              handleInputFocus("email");
+            }}
+            onBlur={() => setActiveInput(null)}
           />
           <View style={styles.passwordWrapper}>
             <TextInput
+              name="password"
               inputMode="text"
               secureTextEntry={true}
               placeholder="Password"
               placeholderTextColor="#BDBDBD"
-              style={[styles.input, styles.inputPassword]}
+              style={[
+                styles.input,
+                styles.inputPassword,
+                activeInput === "password" && styles.inputActive,
+              ]}
+              onFocus={() => {
+                handleInputFocus("password");
+              }}
+              onBlur={() => setActiveInput(null)}
             />
             <TouchableOpacity style={styles.showButtonWrapper}>
               <Text style={styles.showButton}>Show</Text>
@@ -47,7 +68,15 @@ const LoginScreen = () => {
 
           <TouchableOpacity>
             <Text style={styles.alreadyHaveAccountText}>
-              Have not an account? Register
+              Have not an account?{" "}
+              <Text
+                style={[
+                  styles.alreadyHaveAccountText,
+                  styles.alreadyHaveAccountTextRegister,
+                ]}
+              >
+                Register
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -95,6 +124,10 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
     borderRadius: 5,
   },
+  inputActive: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#FF6C00",
+  },
   inputPassword: {
     paddingRight: 60,
   },
@@ -131,6 +164,9 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontSize: 16,
     color: "#1B4371",
+  },
+  alreadyHaveAccountTextRegister: {
+    textDecorationLine: "underline",
   },
 });
 

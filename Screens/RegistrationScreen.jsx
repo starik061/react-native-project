@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -13,6 +13,12 @@ import bg from "../assets/images/background.jpg";
 import { AntDesign } from "@expo/vector-icons";
 
 const RegistrationScreen = () => {
+  const [activeInput, setActiveInput] = useState(false);
+
+  const handleInputFocus = (inputName) => {
+    setActiveInput(inputName);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -34,13 +40,27 @@ const RegistrationScreen = () => {
             inputMode="text"
             placeholder="Login"
             placeholderTextColor="#BDBDBD"
-            style={styles.input}
+            style={[
+              styles.input,
+              activeInput === "login" && styles.inputActive,
+            ]}
+            onFocus={() => {
+              handleInputFocus("login");
+            }}
+            onBlur={() => setActiveInput(null)}
           />
           <TextInput
             inputMode="email"
             placeholder="Email address"
             placeholderTextColor="#BDBDBD"
-            style={styles.input}
+            style={[
+              styles.input,
+              activeInput === "email" && styles.inputActive,
+            ]}
+            onFocus={() => {
+              handleInputFocus("email");
+            }}
+            onBlur={() => setActiveInput(null)}
           />
           <View style={styles.passwordWrapper}>
             <TextInput
@@ -48,7 +68,15 @@ const RegistrationScreen = () => {
               secureTextEntry={true}
               placeholder="Password"
               placeholderTextColor="#BDBDBD"
-              style={[styles.input, styles.inputPassword]}
+              style={[
+                styles.input,
+                styles.inputPassword,
+                activeInput === "password" && styles.inputActive,
+              ]}
+              onFocus={() => {
+                handleInputFocus("password");
+              }}
+              onBlur={() => setActiveInput(null)}
             />
             <TouchableOpacity style={styles.showButtonWrapper}>
               <Text style={styles.showButton}>Show</Text>
@@ -121,6 +149,10 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#E8E8E8",
     borderRadius: 5,
+  },
+  inputActive: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#FF6C00",
   },
   inputPassword: {
     paddingRight: 60,
