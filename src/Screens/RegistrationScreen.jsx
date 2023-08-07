@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import {
   ImageBackground,
+  Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -25,99 +27,101 @@ const RegistrationScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.backgoundImage}
-        source={bg}
-        resizeMode="cover"
-      >
-        <View style={styles.form}>
-          <View style={styles.avatar}>
-            <AntDesign
-              name="pluscircleo"
-              size={25}
-              color="#FF6C00"
-              style={styles.addAvatarIcon}
-            />
-          </View>
-          <Text style={styles.registrationHeader}>Registration</Text>
-          <KeyboardAvoidingView
-            style={styles.keyboardAvoidingView}
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-          >
-            <TextInput
-              inputMode="text"
-              placeholder="Login"
-              placeholderTextColor="#BDBDBD"
-              style={[
-                styles.input,
-                activeInput === "login" && styles.inputActive,
-              ]}
-              onFocus={() => {
-                handleInputFocus("login");
-              }}
-              onBlur={() => setActiveInput(null)}
-              onChangeText={setLogin}
-            />
-          </KeyboardAvoidingView>
-          <KeyboardAvoidingView
-            style={styles.keyboardAvoidingView}
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-          >
-            <TextInput
-              inputMode="email"
-              placeholder="Email address"
-              placeholderTextColor="#BDBDBD"
-              style={[
-                styles.input,
-                activeInput === "email" && styles.inputActive,
-              ]}
-              onFocus={() => {
-                handleInputFocus("email");
-              }}
-              onBlur={() => setActiveInput(null)}
-              onChangeText={setEmail}
-            />
-          </KeyboardAvoidingView>
-          <View style={styles.passwordWrapper}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <ImageBackground
+          style={styles.backgoundImage}
+          source={bg}
+          resizeMode="cover"
+        >
+          <View style={styles.form}>
+            <View style={styles.avatar}>
+              <AntDesign
+                name="pluscircleo"
+                size={25}
+                color="#FF6C00"
+                style={styles.addAvatarIcon}
+              />
+            </View>
+            <Text style={styles.registrationHeader}>Registration</Text>
             <KeyboardAvoidingView
               style={styles.keyboardAvoidingView}
               behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <TextInput
                 inputMode="text"
-                secureTextEntry={true}
-                placeholder="Password"
+                placeholder="Login"
                 placeholderTextColor="#BDBDBD"
                 style={[
                   styles.input,
-                  styles.inputPassword,
-                  activeInput === "password" && styles.inputActive,
+                  activeInput === "login" && styles.inputActive,
                 ]}
                 onFocus={() => {
-                  handleInputFocus("password");
+                  handleInputFocus("login");
                 }}
                 onBlur={() => setActiveInput(null)}
-                onChangeText={setPassword}
+                onChangeText={setLogin}
               />
             </KeyboardAvoidingView>
-            <TouchableOpacity style={styles.showButtonWrapper}>
-              <Text style={styles.showButton}>Show</Text>
+            <KeyboardAvoidingView
+              style={styles.keyboardAvoidingView}
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+            >
+              <TextInput
+                inputMode="email"
+                placeholder="Email address"
+                placeholderTextColor="#BDBDBD"
+                style={[
+                  styles.input,
+                  activeInput === "email" && styles.inputActive,
+                ]}
+                onFocus={() => {
+                  handleInputFocus("email");
+                }}
+                onBlur={() => setActiveInput(null)}
+                onChangeText={setEmail}
+              />
+            </KeyboardAvoidingView>
+            <View style={styles.passwordWrapper}>
+              <KeyboardAvoidingView
+                style={styles.keyboardAvoidingView}
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+              >
+                <TextInput
+                  inputMode="text"
+                  secureTextEntry={true}
+                  placeholder="Password"
+                  placeholderTextColor="#BDBDBD"
+                  style={[
+                    styles.input,
+                    styles.inputPassword,
+                    activeInput === "password" && styles.inputActive,
+                  ]}
+                  onFocus={() => {
+                    handleInputFocus("password");
+                  }}
+                  onBlur={() => setActiveInput(null)}
+                  onChangeText={setPassword}
+                />
+              </KeyboardAvoidingView>
+              <TouchableOpacity style={styles.showButtonWrapper}>
+                <Text style={styles.showButton}>Show</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity style={styles.registerButton}>
+              <Text style={styles.registerButtonText}>Register</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <Text style={styles.alreadyHaveAccountText}>
+                Already have an account? Log in
+              </Text>
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity style={styles.registerButton}>
-            <Text style={styles.registerButtonText}>Register</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Text style={styles.alreadyHaveAccountText}>
-              Already have an account? Log in
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 const styles = StyleSheet.create({
