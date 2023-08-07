@@ -8,12 +8,12 @@ import {
   View,
 } from "react-native";
 
-import bg from "../assets/images/background.jpg";
+import bg from "../images/background.jpg";
 
-import { AntDesign } from "@expo/vector-icons";
-
-const RegistrationScreen = () => {
+const LoginScreen = () => {
   const [activeInput, setActiveInput] = useState(false);
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleInputFocus = (inputName) => {
     setActiveInput(inputName);
@@ -27,29 +27,9 @@ const RegistrationScreen = () => {
         resizeMode="cover"
       >
         <View style={styles.form}>
-          <View style={styles.avatar}>
-            <AntDesign
-              name="pluscircleo"
-              size={25}
-              color="#FF6C00"
-              style={styles.addAvatarIcon}
-            />
-          </View>
-          <Text style={styles.registrationHeader}>Registration</Text>
+          <Text style={styles.registrationHeader}>Log in</Text>
           <TextInput
-            inputMode="text"
-            placeholder="Login"
-            placeholderTextColor="#BDBDBD"
-            style={[
-              styles.input,
-              activeInput === "login" && styles.inputActive,
-            ]}
-            onFocus={() => {
-              handleInputFocus("login");
-            }}
-            onBlur={() => setActiveInput(null)}
-          />
-          <TextInput
+            name="email"
             inputMode="email"
             placeholder="Email address"
             placeholderTextColor="#BDBDBD"
@@ -61,9 +41,11 @@ const RegistrationScreen = () => {
               handleInputFocus("email");
             }}
             onBlur={() => setActiveInput(null)}
+            onChangeText={setLogin}
           />
           <View style={styles.passwordWrapper}>
             <TextInput
+              name="password"
               inputMode="text"
               secureTextEntry={true}
               placeholder="Password"
@@ -77,6 +59,7 @@ const RegistrationScreen = () => {
                 handleInputFocus("password");
               }}
               onBlur={() => setActiveInput(null)}
+              onChangeText={setPassword}
             />
             <TouchableOpacity style={styles.showButtonWrapper}>
               <Text style={styles.showButton}>Show</Text>
@@ -84,12 +67,20 @@ const RegistrationScreen = () => {
           </View>
 
           <TouchableOpacity style={styles.registerButton}>
-            <Text style={styles.registerButtonText}>Register</Text>
+            <Text style={styles.registerButtonText}>Log in</Text>
           </TouchableOpacity>
 
           <TouchableOpacity>
             <Text style={styles.alreadyHaveAccountText}>
-              Already have an account? Log in
+              Have not an account?{" "}
+              <Text
+                style={[
+                  styles.alreadyHaveAccountText,
+                  styles.alreadyHaveAccountTextRegister,
+                ]}
+              >
+                Register
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -97,6 +88,7 @@ const RegistrationScreen = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -107,27 +99,13 @@ const styles = StyleSheet.create({
   },
   form: {
     position: "relative",
-
     alignItems: "center",
-    paddingTop: 92,
-    paddingBottom: 45,
+    paddingTop: 32,
+    paddingBottom: 111,
     paddingHorizontal: 16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "#FFFFFF",
-  },
-  avatar: {
-    position: "absolute",
-    top: -60,
-    width: 120,
-    height: 120,
-    borderRadius: 16,
-    backgroundColor: "#F6F6F6",
-  },
-  addAvatarIcon: {
-    position: "absolute",
-    right: -12.5,
-    bottom: 14,
   },
   registrationHeader: {
     marginBottom: 32,
@@ -191,6 +169,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#1B4371",
   },
+  alreadyHaveAccountTextRegister: {
+    textDecorationLine: "underline",
+  },
 });
 
-export default RegistrationScreen;
+export default LoginScreen;

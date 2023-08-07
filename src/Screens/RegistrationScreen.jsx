@@ -8,10 +8,16 @@ import {
   View,
 } from "react-native";
 
-import bg from "../assets/images/background.jpg";
+import bg from "../images/background.jpg";
 
-const LoginScreen = () => {
+import { AntDesign } from "@expo/vector-icons";
+
+const RegistrationScreen = () => {
   const [activeInput, setActiveInput] = useState(false);
+
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleInputFocus = (inputName) => {
     setActiveInput(inputName);
@@ -25,9 +31,30 @@ const LoginScreen = () => {
         resizeMode="cover"
       >
         <View style={styles.form}>
-          <Text style={styles.registrationHeader}>Log in</Text>
+          <View style={styles.avatar}>
+            <AntDesign
+              name="pluscircleo"
+              size={25}
+              color="#FF6C00"
+              style={styles.addAvatarIcon}
+            />
+          </View>
+          <Text style={styles.registrationHeader}>Registration</Text>
           <TextInput
-            name="email"
+            inputMode="text"
+            placeholder="Login"
+            placeholderTextColor="#BDBDBD"
+            style={[
+              styles.input,
+              activeInput === "login" && styles.inputActive,
+            ]}
+            onFocus={() => {
+              handleInputFocus("login");
+            }}
+            onBlur={() => setActiveInput(null)}
+            onChangeText={setLogin}
+          />
+          <TextInput
             inputMode="email"
             placeholder="Email address"
             placeholderTextColor="#BDBDBD"
@@ -39,10 +66,10 @@ const LoginScreen = () => {
               handleInputFocus("email");
             }}
             onBlur={() => setActiveInput(null)}
+            onChangeText={setEmail}
           />
           <View style={styles.passwordWrapper}>
             <TextInput
-              name="password"
               inputMode="text"
               secureTextEntry={true}
               placeholder="Password"
@@ -56,6 +83,7 @@ const LoginScreen = () => {
                 handleInputFocus("password");
               }}
               onBlur={() => setActiveInput(null)}
+              onChangeText={setPassword}
             />
             <TouchableOpacity style={styles.showButtonWrapper}>
               <Text style={styles.showButton}>Show</Text>
@@ -63,20 +91,12 @@ const LoginScreen = () => {
           </View>
 
           <TouchableOpacity style={styles.registerButton}>
-            <Text style={styles.registerButtonText}>Log in</Text>
+            <Text style={styles.registerButtonText}>Register</Text>
           </TouchableOpacity>
 
           <TouchableOpacity>
             <Text style={styles.alreadyHaveAccountText}>
-              Have not an account?{" "}
-              <Text
-                style={[
-                  styles.alreadyHaveAccountText,
-                  styles.alreadyHaveAccountTextRegister,
-                ]}
-              >
-                Register
-              </Text>
+              Already have an account? Log in
             </Text>
           </TouchableOpacity>
         </View>
@@ -84,7 +104,6 @@ const LoginScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -95,13 +114,27 @@ const styles = StyleSheet.create({
   },
   form: {
     position: "relative",
+
     alignItems: "center",
-    paddingTop: 32,
-    paddingBottom: 111,
+    paddingTop: 92,
+    paddingBottom: 45,
     paddingHorizontal: 16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "#FFFFFF",
+  },
+  avatar: {
+    position: "absolute",
+    top: -60,
+    width: 120,
+    height: 120,
+    borderRadius: 16,
+    backgroundColor: "#F6F6F6",
+  },
+  addAvatarIcon: {
+    position: "absolute",
+    right: -12.5,
+    bottom: 14,
   },
   registrationHeader: {
     marginBottom: 32,
@@ -165,9 +198,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#1B4371",
   },
-  alreadyHaveAccountTextRegister: {
-    textDecorationLine: "underline",
-  },
 });
 
-export default LoginScreen;
+export default RegistrationScreen;
