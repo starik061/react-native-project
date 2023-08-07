@@ -25,7 +25,9 @@ const RegistrationScreen = () => {
   const handleInputFocus = (inputName) => {
     setActiveInput(inputName);
   };
-
+  const handleRegisterFormSubmit = () => {
+    console.log("Data", `${login} +${email}+ ${password}`);
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -109,7 +111,10 @@ const RegistrationScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.registerButton}>
+            <TouchableOpacity
+              style={styles.registerButton}
+              onPress={handleRegisterFormSubmit}
+            >
               <Text style={styles.registerButtonText}>Register</Text>
             </TouchableOpacity>
 

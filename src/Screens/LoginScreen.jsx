@@ -22,6 +22,10 @@ const LoginScreen = () => {
     setActiveInput(inputName);
   };
 
+  const handleLoginFormSubmit = () => {
+    console.log("Data", `${login} + ${password}`);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -80,7 +84,10 @@ const LoginScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.registerButton}>
+            <TouchableOpacity
+              style={styles.registerButton}
+              onPress={handleLoginFormSubmit}
+            >
               <Text style={styles.registerButtonText}>Log in</Text>
             </TouchableOpacity>
 
