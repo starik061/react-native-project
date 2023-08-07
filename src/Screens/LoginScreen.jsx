@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   ImageBackground,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
@@ -28,39 +29,49 @@ const LoginScreen = () => {
       >
         <View style={styles.form}>
           <Text style={styles.registrationHeader}>Log in</Text>
-          <TextInput
-            name="email"
-            inputMode="email"
-            placeholder="Email address"
-            placeholderTextColor="#BDBDBD"
-            style={[
-              styles.input,
-              activeInput === "email" && styles.inputActive,
-            ]}
-            onFocus={() => {
-              handleInputFocus("email");
-            }}
-            onBlur={() => setActiveInput(null)}
-            onChangeText={setLogin}
-          />
-          <View style={styles.passwordWrapper}>
+          <KeyboardAvoidingView
+            style={styles.keyboardAvoidingView}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
             <TextInput
-              name="password"
-              inputMode="text"
-              secureTextEntry={true}
-              placeholder="Password"
+              name="email"
+              inputMode="email"
+              placeholder="Email address"
               placeholderTextColor="#BDBDBD"
               style={[
                 styles.input,
-                styles.inputPassword,
-                activeInput === "password" && styles.inputActive,
+                activeInput === "email" && styles.inputActive,
               ]}
               onFocus={() => {
-                handleInputFocus("password");
+                handleInputFocus("email");
               }}
               onBlur={() => setActiveInput(null)}
-              onChangeText={setPassword}
+              onChangeText={setLogin}
             />
+          </KeyboardAvoidingView>
+          <View style={styles.passwordWrapper}>
+            <KeyboardAvoidingView
+              style={styles.keyboardAvoidingView}
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+            >
+              <TextInput
+                name="password"
+                inputMode="text"
+                secureTextEntry={true}
+                placeholder="Password"
+                placeholderTextColor="#BDBDBD"
+                style={[
+                  styles.input,
+                  styles.inputPassword,
+                  activeInput === "password" && styles.inputActive,
+                ]}
+                onFocus={() => {
+                  handleInputFocus("password");
+                }}
+                onBlur={() => setActiveInput(null)}
+                onChangeText={setPassword}
+              />
+            </KeyboardAvoidingView>
             <TouchableOpacity style={styles.showButtonWrapper}>
               <Text style={styles.showButton}>Show</Text>
             </TouchableOpacity>
@@ -171,6 +182,9 @@ const styles = StyleSheet.create({
   },
   alreadyHaveAccountTextRegister: {
     textDecorationLine: "underline",
+  },
+  keyboardAvoidingView: {
+    width: "100%",
   },
 });
 

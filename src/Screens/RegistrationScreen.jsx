@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   ImageBackground,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
@@ -40,51 +41,66 @@ const RegistrationScreen = () => {
             />
           </View>
           <Text style={styles.registrationHeader}>Registration</Text>
-          <TextInput
-            inputMode="text"
-            placeholder="Login"
-            placeholderTextColor="#BDBDBD"
-            style={[
-              styles.input,
-              activeInput === "login" && styles.inputActive,
-            ]}
-            onFocus={() => {
-              handleInputFocus("login");
-            }}
-            onBlur={() => setActiveInput(null)}
-            onChangeText={setLogin}
-          />
-          <TextInput
-            inputMode="email"
-            placeholder="Email address"
-            placeholderTextColor="#BDBDBD"
-            style={[
-              styles.input,
-              activeInput === "email" && styles.inputActive,
-            ]}
-            onFocus={() => {
-              handleInputFocus("email");
-            }}
-            onBlur={() => setActiveInput(null)}
-            onChangeText={setEmail}
-          />
-          <View style={styles.passwordWrapper}>
+          <KeyboardAvoidingView
+            style={styles.keyboardAvoidingView}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
             <TextInput
               inputMode="text"
-              secureTextEntry={true}
-              placeholder="Password"
+              placeholder="Login"
               placeholderTextColor="#BDBDBD"
               style={[
                 styles.input,
-                styles.inputPassword,
-                activeInput === "password" && styles.inputActive,
+                activeInput === "login" && styles.inputActive,
               ]}
               onFocus={() => {
-                handleInputFocus("password");
+                handleInputFocus("login");
               }}
               onBlur={() => setActiveInput(null)}
-              onChangeText={setPassword}
+              onChangeText={setLogin}
             />
+          </KeyboardAvoidingView>
+          <KeyboardAvoidingView
+            style={styles.keyboardAvoidingView}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
+            <TextInput
+              inputMode="email"
+              placeholder="Email address"
+              placeholderTextColor="#BDBDBD"
+              style={[
+                styles.input,
+                activeInput === "email" && styles.inputActive,
+              ]}
+              onFocus={() => {
+                handleInputFocus("email");
+              }}
+              onBlur={() => setActiveInput(null)}
+              onChangeText={setEmail}
+            />
+          </KeyboardAvoidingView>
+          <View style={styles.passwordWrapper}>
+            <KeyboardAvoidingView
+              style={styles.keyboardAvoidingView}
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+            >
+              <TextInput
+                inputMode="text"
+                secureTextEntry={true}
+                placeholder="Password"
+                placeholderTextColor="#BDBDBD"
+                style={[
+                  styles.input,
+                  styles.inputPassword,
+                  activeInput === "password" && styles.inputActive,
+                ]}
+                onFocus={() => {
+                  handleInputFocus("password");
+                }}
+                onBlur={() => setActiveInput(null)}
+                onChangeText={setPassword}
+              />
+            </KeyboardAvoidingView>
             <TouchableOpacity style={styles.showButtonWrapper}>
               <Text style={styles.showButton}>Show</Text>
             </TouchableOpacity>
@@ -197,6 +213,9 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontSize: 16,
     color: "#1B4371",
+  },
+  keyboardAvoidingView: {
+    width: "100%",
   },
 });
 
