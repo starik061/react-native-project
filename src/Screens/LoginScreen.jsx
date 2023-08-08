@@ -15,7 +15,7 @@ import bg from "../images/background.jpg";
 
 const LoginScreen = () => {
   const [activeInput, setActiveInput] = useState(false);
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordShowen, setIsPasswordShowen] = useState(false);
 
@@ -24,7 +24,9 @@ const LoginScreen = () => {
   };
 
   const handleLoginFormSubmit = () => {
-    console.log("Data", `${login} + ${password}`);
+    console.log("Data", `${email} + ${password}`);
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -42,6 +44,7 @@ const LoginScreen = () => {
               behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <TextInput
+                value={email}
                 name="email"
                 inputMode="email"
                 placeholder="Email address"
@@ -54,7 +57,7 @@ const LoginScreen = () => {
                   handleInputFocus("email");
                 }}
                 onBlur={() => setActiveInput(null)}
-                onChangeText={setLogin}
+                onChangeText={setEmail}
               />
             </KeyboardAvoidingView>
             <View style={styles.passwordWrapper}>
@@ -63,6 +66,7 @@ const LoginScreen = () => {
                 behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
                 <TextInput
+                  value={password}
                   name="password"
                   inputMode="text"
                   secureTextEntry={isPasswordShowen ? false : true}

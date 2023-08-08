@@ -28,6 +28,9 @@ const RegistrationScreen = () => {
   };
   const handleRegisterFormSubmit = () => {
     console.log("Data", `${login} +${email}+ ${password}`);
+    setLogin("");
+    setEmail("");
+    setPassword("");
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -52,6 +55,7 @@ const RegistrationScreen = () => {
               behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <TextInput
+                value={login}
                 inputMode="text"
                 placeholder="Login"
                 placeholderTextColor="#BDBDBD"
@@ -71,6 +75,7 @@ const RegistrationScreen = () => {
               behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <TextInput
+                value={email}
                 inputMode="email"
                 placeholder="Email address"
                 placeholderTextColor="#BDBDBD"
@@ -91,6 +96,7 @@ const RegistrationScreen = () => {
                 behavior={Platform.OS == "ios" ? "padding" : "height"}
               >
                 <TextInput
+                  value={password}
                   inputMode="text"
                   secureTextEntry={isPasswordShowen ? false : true}
                   placeholder="Password"
