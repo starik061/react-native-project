@@ -17,6 +17,7 @@ const LoginScreen = () => {
   const [activeInput, setActiveInput] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordShowen, setIsPasswordShowen] = useState(false);
 
   const handleInputFocus = (inputName) => {
     setActiveInput(inputName);
@@ -64,7 +65,7 @@ const LoginScreen = () => {
                 <TextInput
                   name="password"
                   inputMode="text"
-                  secureTextEntry={true}
+                  secureTextEntry={isPasswordShowen ? false : true}
                   placeholder="Password"
                   placeholderTextColor="#BDBDBD"
                   style={[
@@ -79,8 +80,13 @@ const LoginScreen = () => {
                   onChangeText={setPassword}
                 />
               </KeyboardAvoidingView>
-              <TouchableOpacity style={styles.showButtonWrapper}>
-                <Text style={styles.showButton}>Show</Text>
+              <TouchableOpacity
+                style={styles.showButtonWrapper}
+                onPress={() => setIsPasswordShowen(!isPasswordShowen)}
+              >
+                <Text style={styles.showButton}>
+                  {isPasswordShowen ? "Hide" : "Show"}
+                </Text>
               </TouchableOpacity>
             </View>
 
