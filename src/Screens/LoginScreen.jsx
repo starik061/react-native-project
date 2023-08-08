@@ -31,18 +31,20 @@ const LoginScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.backgoundImage}
-          source={bg}
-          resizeMode="cover"
-        >
-          <View style={styles.form}>
-            <Text style={styles.registrationHeader}>Log in</Text>
-            <KeyboardAvoidingView
-              style={styles.keyboardAvoidingView}
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
-            >
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingView}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={-110}
+      >
+        <View style={styles.container}>
+          <ImageBackground
+            style={styles.backgoundImage}
+            source={bg}
+            resizeMode="cover"
+          >
+            <View style={styles.form}>
+              <Text style={styles.registrationHeader}>Log in</Text>
+
               <TextInput
                 value={email}
                 name="email"
@@ -59,12 +61,8 @@ const LoginScreen = () => {
                 onBlur={() => setActiveInput(null)}
                 onChangeText={setEmail}
               />
-            </KeyboardAvoidingView>
-            <View style={styles.passwordWrapper}>
-              <KeyboardAvoidingView
-                style={styles.keyboardAvoidingView}
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-              >
+
+              <View style={styles.passwordWrapper}>
                 <TextInput
                   value={password}
                   name="password"
@@ -83,40 +81,41 @@ const LoginScreen = () => {
                   onBlur={() => setActiveInput(null)}
                   onChangeText={setPassword}
                 />
-              </KeyboardAvoidingView>
+
+                <TouchableOpacity
+                  style={styles.showButtonWrapper}
+                  onPress={() => setIsPasswordShowen(!isPasswordShowen)}
+                >
+                  <Text style={styles.showButton}>
+                    {isPasswordShowen ? "Hide" : "Show"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
               <TouchableOpacity
-                style={styles.showButtonWrapper}
-                onPress={() => setIsPasswordShowen(!isPasswordShowen)}
+                style={styles.registerButton}
+                onPress={handleLoginFormSubmit}
               >
-                <Text style={styles.showButton}>
-                  {isPasswordShowen ? "Hide" : "Show"}
+                <Text style={styles.registerButtonText}>Log in</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <Text style={styles.alreadyHaveAccountText}>
+                  Have not an account?{" "}
+                  <Text
+                    style={[
+                      styles.alreadyHaveAccountText,
+                      styles.alreadyHaveAccountTextRegister,
+                    ]}
+                  >
+                    Register
+                  </Text>
                 </Text>
               </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-              style={styles.registerButton}
-              onPress={handleLoginFormSubmit}
-            >
-              <Text style={styles.registerButtonText}>Log in</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <Text style={styles.alreadyHaveAccountText}>
-                Have not an account?{" "}
-                <Text
-                  style={[
-                    styles.alreadyHaveAccountText,
-                    styles.alreadyHaveAccountTextRegister,
-                  ]}
-                >
-                  Register
-                </Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
@@ -205,7 +204,7 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   keyboardAvoidingView: {
-    width: "100%",
+    flex: 1,
   },
 });
 

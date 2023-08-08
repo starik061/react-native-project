@@ -34,26 +34,28 @@ const RegistrationScreen = () => {
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.backgoundImage}
-          source={bg}
-          resizeMode="cover"
-        >
-          <View style={styles.form}>
-            <View style={styles.avatar}>
-              <AntDesign
-                name="pluscircleo"
-                size={25}
-                color="#FF6C00"
-                style={styles.addAvatarIcon}
-              />
-            </View>
-            <Text style={styles.registrationHeader}>Registration</Text>
-            <KeyboardAvoidingView
-              style={styles.keyboardAvoidingView}
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
-            >
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingView}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={-40}
+      >
+        <View style={styles.container}>
+          <ImageBackground
+            style={styles.backgoundImage}
+            source={bg}
+            resizeMode="cover"
+          >
+            <View style={styles.form}>
+              <View style={styles.avatar}>
+                <AntDesign
+                  name="pluscircleo"
+                  size={25}
+                  color="#FF6C00"
+                  style={styles.addAvatarIcon}
+                />
+              </View>
+              <Text style={styles.registrationHeader}>Registration</Text>
+
               <TextInput
                 value={login}
                 inputMode="text"
@@ -69,11 +71,7 @@ const RegistrationScreen = () => {
                 onBlur={() => setActiveInput(null)}
                 onChangeText={setLogin}
               />
-            </KeyboardAvoidingView>
-            <KeyboardAvoidingView
-              style={styles.keyboardAvoidingView}
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
-            >
+
               <TextInput
                 value={email}
                 inputMode="email"
@@ -89,12 +87,8 @@ const RegistrationScreen = () => {
                 onBlur={() => setActiveInput(null)}
                 onChangeText={setEmail}
               />
-            </KeyboardAvoidingView>
-            <View style={styles.passwordWrapper}>
-              <KeyboardAvoidingView
-                style={styles.keyboardAvoidingView}
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-              >
+
+              <View style={styles.passwordWrapper}>
                 <TextInput
                   value={password}
                   inputMode="text"
@@ -112,32 +106,33 @@ const RegistrationScreen = () => {
                   onBlur={() => setActiveInput(null)}
                   onChangeText={setPassword}
                 />
-              </KeyboardAvoidingView>
+
+                <TouchableOpacity
+                  style={styles.showButtonWrapper}
+                  onPress={() => setIsPasswordShowen(!isPasswordShowen)}
+                >
+                  <Text style={styles.showButton}>
+                    {isPasswordShowen ? "Hide" : "Show"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
               <TouchableOpacity
-                style={styles.showButtonWrapper}
-                onPress={() => setIsPasswordShowen(!isPasswordShowen)}
+                style={styles.registerButton}
+                onPress={handleRegisterFormSubmit}
               >
-                <Text style={styles.showButton}>
-                  {isPasswordShowen ? "Hide" : "Show"}
+                <Text style={styles.registerButtonText}>Register</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <Text style={styles.alreadyHaveAccountText}>
+                  Already have an account? Log in
                 </Text>
               </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-              style={styles.registerButton}
-              onPress={handleRegisterFormSubmit}
-            >
-              <Text style={styles.registerButtonText}>Register</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-              <Text style={styles.alreadyHaveAccountText}>
-                Already have an account? Log in
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
@@ -236,7 +231,7 @@ const styles = StyleSheet.create({
     color: "#1B4371",
   },
   keyboardAvoidingView: {
-    width: "100%",
+    flex: 1,
   },
 });
 
